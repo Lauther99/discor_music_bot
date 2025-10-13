@@ -1,0 +1,43 @@
+{
+  "guild_id": 1209588807565975562,
+  "now_playing": 0,
+  "stopped": false,
+  "loop": false,
+  "songs": [
+    {
+      "title": "ISOKNOCK - SIGNAL w/ ICYBERHELL (by Eptic)",
+      "url": "https://rr3---sn-uqx2-2p0z.googlevideo.com/videoplayback?expire=1760410031&ei=T2XtaOXxNcy49cYPo4_kgQY&ip=2001%3A1388%3A35e1%3Aedcd%3Ae1ba%3A356a%3A3a58%3A5cb7&id=o-AKJyIBazSFN6sJHG2QCvDWz87P5SHnFQrB5zsX-v4XwT&itag=140&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&met=1760388431%2C&mh=xN&mm=31%2C29&mn=sn-uqx2-2p0z%2Csn-nja7sner&ms=au%2Crdu&mv=m&mvi=3&pl=48&rms=au%2Cau&initcwndbps=1565000&bui=ATw7iSVVijUdwcHxeuhgjIix5ONkouKCeeyFHKwNJ4cuWbafeS1Zb_qmigtTP4Yzc2v28wzDBOX2kxON&vprv=1&svpuc=1&mime=audio%2Fmp4&ns=XBl2Wa48e8HAF15Pg7o8hcoQ&rqh=1&gir=yes&clen=990082&dur=61.114&lmt=1747599144525987&mt=1760388095&fvip=1&keepalive=yes&lmw=1&fexp=51557447%2C51565116%2C51565682%2C51580970&c=TVHTML5&sefc=1&txp=6208224&n=CJHELGoPmECxDA&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cvprv%2Csvpuc%2Cmime%2Cns%2Crqh%2Cgir%2Cclen%2Cdur%2Clmt&sig=AJfQdSswRQIhAMJFunH33lijFHAvupkLruM4FMysPz5Vkrpaq72oO-_mAiA6X5rWArRz12VwEnvjh9ydnK-0f9dsnQVU1VzIH2u5Rw%3D%3D&lsparams=met%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Crms%2Cinitcwndbps&lsig=APaTxxMwRQIhAJpMXMtsBl-GuYdiPvNmFiZs05q2XTuNzwSrUlN0-Ki4AiA-oPvHGjHX7Hbn-Sgz1EZnDk2ay-3ITS5z-Nqfz64wow%3D%3D",
+      "duration": 61,
+      "webpage_url": "https://www.youtube.com/watch?v=74OME7bhWto",
+      "exp": 1760410031
+    },
+    {
+      "title": "Knock2 - crank the bass, play the muzik (Official Visualizer)",
+      "url": "https://rr1---sn-njaeyn7z.googlevideo.com/videoplayback?expire=1760408995&ei=Q2HtaOLdCbz9-LAP2oC78Q4&ip=2001%3A1388%3A35e1%3Aedcd%3Ae1ba%3A356a%3A3a58%3A5cb7&id=o-AEgwKWnO--TOVoKoG4ikUbF9DTZm7sVYT9NvCqYIoyqe&itag=140&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&met=1760387395%2C&mh=R-&mm=31%2C29&mn=sn-njaeyn7z%2Csn-2onja5-5i&ms=au%2Crdu&mv=m&mvi=1&pl=48&rms=au%2Cau&initcwndbps=1331250&bui=ATw7iSVSEzSpAM05jqHTxzQtsUoJVgAb958eYgBoVEpupFTv1QtUUzHtgdtRU-G591T4dGZCe5ArBj-5&vprv=1&svpuc=1&mime=audio%2Fmp4&ns=ChREZzPIFzKd6qILSBU1YwYQ&rqh=1&gir=yes&clen=3369822&dur=208.143&lmt=1737146052473261&mt=1760386895&fvip=4&keepalive=yes&lmw=1&fexp=51557447%2C51565116%2C51565682%2C51580970&c=TVHTML5&sefc=1&txp=6318224&n=7mNxJxffu4xHXA&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cvprv%2Csvpuc%2Cmime%2Cns%2Crqh%2Cgir%2Cclen%2Cdur%2Clmt&lsparams=met%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Crms%2Cinitcwndbps&lsig=APaTxxMwRgIhANRxVoeP4JVkhem0OusK0ujXS_NaEva499zmx93FFLTeAiEA1h-P-BHsvlUlkWEuf6p5d_L-FTVpyiivWG6J0c5e6F0%3D&sig=AJfQdSswRQIhAMqRN1YLqsOujP7o4TJuDRlja0s71cNheXg_9opOiuXxAiBksL89tOiMlLdUAaoHywsjJddAl3dbk51vZ5i-D0j51Q%3D%3D",
+      "duration": 208,
+      "webpage_url": "https://www.youtube.com/watch?v=qS8gWL8s3PQ",
+      "exp": 1760408995
+    },
+    {
+      "title": "Knock2 - feel U luv Me (Official Visualizer)",
+      "url": "https://rr2---sn-uqx2-2p0z.googlevideo.com/videoplayback?expire=1760408968&ei=KGHtaOLfM8OQ-LAP4_HmmQY&ip=2001%3A1388%3A35e1%3Aedcd%3Ae1ba%3A356a%3A3a58%3A5cb7&id=o-AIxm5pUcuqzaaqgVUp5Yoitkoy1xeykEARzEmOPIc--t&itag=140&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&met=1760387368%2C&mh=68&mm=31%2C29&mn=sn-uqx2-2p0z%2Csn-2onja5-5i&ms=au%2Crdu&mv=m&mvi=2&pl=48&rms=au%2Cau&initcwndbps=1461250&bui=ATw7iSXdXpZrz0TZXeb5HweReUJtFoGlChJuDDKbxv4OLiKT5oIJ1LcMB6VHKB_YJeolUILFiQ0Fabws&vprv=1&svpuc=1&mime=audio%2Fmp4&ns=uinswmoBoKIHc7teEPIxqxUQ&rqh=1&gir=yes&clen=3791744&dur=234.219&lmt=1757283032132932&mt=1760386895&fvip=3&keepalive=yes&lmw=1&fexp=51557447%2C51565116%2C51565682%2C51580970&c=TVHTML5&sefc=1&txp=5532534&n=31YR7CBj56wsgw&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cvprv%2Csvpuc%2Cmime%2Cns%2Crqh%2Cgir%2Cclen%2Cdur%2Clmt&lsparams=met%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Crms%2Cinitcwndbps&lsig=APaTxxMwRAIgAUI4qE-tu0dC_goC1nrXQmJlwLDfXFD9RwkGiTGzRq8CIEnsyccuEmH6ZWwDHoKheuASN0H1GOaelWCL8uqgLBL4&sig=AJfQdSswRAIgcSXeVYo5X13mi08z02VMHf0T8IvsQ4lnYW26-bD-Ax4CIG-jMrYF_xd3Z2PVc0fCknNNXD7ldIXW_hVi8Evlfo1A",
+      "duration": 234,
+      "webpage_url": "https://www.youtube.com/watch?v=Cb-SEmhiYjA",
+      "exp": 1760408968
+    },
+    {
+      "title": "ISOxo - Aarena (Knock2 Remix) (Official Audio)",
+      "url": "https://rr4---sn-2onja5-5i.googlevideo.com/videoplayback?expire=1760408983&ei=N2HtaPfKG7KT-LAP1cvX-Aw&ip=2001%3A1388%3A35e1%3Aedcd%3Ae1ba%3A356a%3A3a58%3A5cb7&id=o-AIJvAPxYBaG-XlVsfZK1kIR5RKhezNFvDXbmdzAWRcbu&itag=140&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&met=1760387383%2C&mh=Jd&mm=31%2C26&mn=sn-2onja5-5i%2Csn-bg0s7nld&ms=au%2Conr&mv=m&mvi=4&pl=48&rms=au%2Cau&initcwndbps=1850000&bui=ATw7iSWVXRJNz8eMYtSjdLrqcZLH5kTwkx3v0KMGkO8CBz082tyukQJ4-To0RmpFKwl-zULCY-z8NDDM&vprv=1&svpuc=1&mime=audio%2Fmp4&ns=BqrixdX-DdjjoS16GGSc7EkQ&rqh=1&gir=yes&clen=3364839&dur=207.865&lmt=1737344785360688&mt=1760387139&fvip=2&keepalive=yes&lmw=1&fexp=51557447%2C51565116%2C51565682%2C51580970&c=TVHTML5&sefc=1&txp=5432534&n=4QbaAlB97NLrvA&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cvprv%2Csvpuc%2Cmime%2Cns%2Crqh%2Cgir%2Cclen%2Cdur%2Clmt&lsparams=met%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Crms%2Cinitcwndbps&lsig=APaTxxMwRAIgFDBQylAwZ83ygEo2hgqDnLzEo21bHD-1SwiELDf11x0CIDbigQQmNVrSQENqAYxjPVBzO8d39IGD7LSy8lrQNone&sig=AJfQdSswRQIgL9uu-N7YV8QbbXIAWQRx2IHpIaD7ZgyW7wXL8Wo13oICIQCQYsWZVyOswAZFVi0ZrKJhvQ7OkZFmDN85H7KA0svxaA%3D%3D",
+      "duration": 208,
+      "webpage_url": "https://www.youtube.com/watch?v=oGlyXqsnMiw",
+      "exp": 1760408983
+    },
+    {
+      "title": "KGM (irl) *",
+      "url": "https://rr1---sn-uqx2-2p0z.googlevideo.com/videoplayback?expire=1760409003&ei=S2HtaNWoJ7KR-LAPgsrriQM&ip=2001%3A1388%3A35e1%3Aedcd%3Ae1ba%3A356a%3A3a58%3A5cb7&id=o-AMc29asPImRfcPPqPL0x81izI7zAMuWuVrM1n6_atAIi&itag=140&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&met=1760387403%2C&mh=Ij&mm=31%2C29&mn=sn-uqx2-2p0z%2Csn-njaeyn7z&ms=au%2Crdu&mv=m&mvi=1&pl=48&rms=au%2Cau&gcr=pe&initcwndbps=1461250&bui=ATw7iSXAGw0V_wz1Rn-YYHfhyMbYtzRVpEjx9HtCCbufcvVqz83buauVrsrv3WK7UblOD6bS8VU6xY8M&vprv=1&svpuc=1&mime=audio%2Fmp4&ns=G9Hr6oKQfVkID05xBTIbR34Q&rqh=1&gir=yes&clen=2569745&dur=158.575&lmt=1728331301905797&mt=1760386895&fvip=4&keepalive=yes&lmw=1&fexp=51557447%2C51565116%2C51565682%2C51580970&c=TVHTML5&sefc=1&txp=2318224&n=0HXPMdsZAYK6VQ&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cgcr%2Cbui%2Cvprv%2Csvpuc%2Cmime%2Cns%2Crqh%2Cgir%2Cclen%2Cdur%2Clmt&lsparams=met%2Cmh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Crms%2Cinitcwndbps&lsig=APaTxxMwRQIgXCiAdWCNIO6aGP9wi3zWQfPbQeJtZk2s75TtX_VK6BQCIQCr_W7M0b8E5HXl6CSnopQZQjBTAcch-SPmMIac9P5jHA%3D%3D&sig=AJfQdSswRQIgM6Cwbntryd7dfD4Y9SlR4pW2hqYldd70Qu6LH3_z34sCIQCRIlFxSZ8zPtN3tnzgbGPpm0OFIljhamlPW_5j05mixQ%3D%3D",
+      "duration": 159,
+      "webpage_url": "https://www.youtube.com/watch?v=uHZ3lYgJScE",
+      "exp": 1760409003
+    }
+  ]
+}
