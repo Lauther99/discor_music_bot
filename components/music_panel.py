@@ -66,7 +66,7 @@ class MusicControls(discord.ui.View):
 
     @discord.ui.button(label="➕ Agregar", style=discord.ButtonStyle.secondary)
     async def add(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await interaction.response.defer()
+        await interaction.response.defer(ephemeral=True)
         
         await self.update_panel(status="✍️ Esperando entrada del usuario...\n\n```\n> escribe abajo ⬇️\n```")
         def check(m): return m.author == interaction.user and m.channel == interaction.channel
