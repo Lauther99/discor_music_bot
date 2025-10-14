@@ -2,7 +2,7 @@ import json
 import yt_dlp
 import discord
 from discord.ext import commands
-from config.config import YDL_OPTIONS, FFMPEG_OPTIONS
+from config.config import YDL_OPTIONS, FFMPEG_OPTIONS, FFMPEG_PATH
 from .shared import (
     show_progress,
     get_temp_playlist_path,
@@ -109,7 +109,7 @@ async def play_next_in_queue(ctx, vc, bot, *, replay=False, next_s=False):
             play_next_in_queue(ctx, vc, bot, next_s=True), loop
         )
 
-    vc.play(discord.FFmpegPCMAudio(url, **FFMPEG_OPTIONS), after=after_play)
+    vc.play(discord.FFmpegPCMAudio(url, executable=FFMPEG_PATH, **FFMPEG_OPTIONS), after=after_play)
 
     await update_view_or_message(
         bot, ctx, f"🎶 Reproduciendo: **{title}** ({index+1}/{len(songs)})"

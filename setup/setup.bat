@@ -18,31 +18,8 @@ if %errorlevel% neq 0 (
 echo Python instalado correctamente.
 echo.
 
-REM --- Verificar FFmpeg ---
-echo [2/5] Verificando instalación de FFmpeg...
-where ffmpeg >nul 2>nul
-if %errorlevel% neq 0 (
-    echo FFmpeg no encontrado. Descargando...
-    powershell -Command "Start-BitsTransfer -Source 'https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip' -Destination 'ffmpeg.zip'"
-    
-    echo Extrayendo FFmpeg...
-    powershell -Command "Expand-Archive ffmpeg.zip -DestinationPath ."
-    
-    set ffdir=
-    for /d %%i in (ffmpeg-*) do set ffdir=%%i
-    move %ffdir%\bin\ffmpeg.exe . >nul
-    rmdir /s /q %ffdir%
-    del ffmpeg.zip
-    
-    :: Agregar la carpeta actual al PATH de usuario
-    setx PATH "%CD%;%PATH%" >nul
-    echo FFmpeg agregado al PATH correctamente.
-)
-echo FFmpeg instalado correctamente.
-echo.
-
 REM --- Descargar repositorio ---
-echo [3/5] Descargando proyecto...
+echo [2/5] Descargando proyecto...
 if not exist "discor_music_bot" (
     powershell -Command "Invoke-WebRequest -Uri 'https://github.com/Lauther99/discor_music_bot/archive/refs/heads/main.zip' -OutFile 'bot.zip'"
     powershell -Command "Expand-Archive bot.zip -DestinationPath ."
@@ -52,9 +29,35 @@ if not exist "discor_music_bot" (
     echo Proyecto ya descargado.
 )
 
+REM --- Verificar FFmpeg ---
+echo [2/5] Verificando instalación de FFmpeg...
+cd discor_music_bot
+
+if not exist "ffmpeg\bin\ffmpeg.exe" (
+    echo FFmpeg no encontrado. Descargando...
+    powershell -Command "Start-BitsTransfer -Source 'https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip' -Destination 'ffmpeg.zip'"
+
+    echo Extrayendo FFmpeg...
+    powershell -Command "Expand-Archive ffmpeg.zip -DestinationPath ."
+
+    set ffdir=
+    for /d %%i in (ffmpeg-*) do set ffdir=%%i
+    if not exist ffmpeg mkdir ffmpeg
+    move "%%ffdir%%\*" "ffmpeg\" >nul
+    rmdir /s /q "%%ffdir%%"
+    del ffmpeg.zip
+
+    echo FFmpeg descargado y configurado en la carpeta del proyecto.
+) else (
+    echo FFmpeg ya está instalado en la carpeta del proyecto.
+)
+cd ..
+echo FFmpeg instalado correctamente.
+echo.
+
+
 REM --- Instalar dependencias ---
 echo [4/5] Instalando dependencias del bot...
-cd discor_music_bot
 :: Crear entorno virtual si no existe
 if not exist venv (
     python -m venv venv
