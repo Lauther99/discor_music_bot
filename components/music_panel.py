@@ -41,26 +41,58 @@ class MusicControls(discord.ui.View):
 
         if vc and vc.is_paused():
             vc.resume()
-            await self.update_panel(status="▶️ Reanudado")
-            return
+            button.disabled = True
+
+            for b in self.children:
+                if b.label == "⏸️ Pausa":
+                    b.disabled = False
 
         # otherwise call your play command without args (play playlist.current desde inicio)
         await self.ctx.invoke(self.bot.get_command("play"))
+        
+    
+    @discord.ui.button(label="⏸️ Pausa", style=discord.ButtonStyle.secondary)
+    async def pause(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await interaction.response.defer(ephemeral=True)
+        vc = self.vc
+
+        if not vc or not vc.is_playing():
+            await self.update_panel(status="⚠️ No hay música reproduciéndose.")
+            return
+
+        vc.pause()
+        button.disabled = True  # 🔒 Desactiva el botón de pausa
+        # 🔓 Rehabilita el botón de play para poder reanudar
+        for b in self.children:
+            if b.label == "▶️ Play":
+                b.disabled = False
+
+        await self.update_panel(status="⏸️ Música pausada.")
 
     @discord.ui.button(label="⏮️", style=discord.ButtonStyle.primary)
     async def back(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer(ephemeral=True)
         await self.ctx.invoke(self.bot.get_command("back"))
+        for b in self.children:
+            if b.label == "▶️ Play":
+                b.disabled = False
 
     @discord.ui.button(label="⏭️", style=discord.ButtonStyle.primary)
     async def skip(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer(ephemeral=True)
         await self.ctx.invoke(self.bot.get_command("skip"))
+        for b in self.children:
+            if b.label == "▶️ Play":
+                b.disabled = False
     
     @discord.ui.button(label="⏹️", style=discord.ButtonStyle.danger)
     async def stop(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer(ephemeral=True)
+        for b in self.children:
+            if b.label == "▶️ Play":
+                b.disabled = False
         await self.ctx.invoke(self.bot.get_command("stop"))
+        
 
     @discord.ui.button(label="➕ Agregar", style=discord.ButtonStyle.secondary)
     async def add(self, interaction: discord.Interaction, button: discord.ui.Button):
