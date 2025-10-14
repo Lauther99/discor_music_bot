@@ -33,7 +33,9 @@ async def play_next_in_queue(ctx, vc, bot, *, replay=False, next_s=False):
 
     index = playlist_data.get("now_playing", 0)
     index = 0 if index <= -1 else index
-    index = index + 1 if next_s else index
+
+    if playlist_data.get("now_playing", 0) >= 0:
+        index = index + 1 if next_s else index
 
     if playlist_data.get("stopped", False) and not replay:
         return
