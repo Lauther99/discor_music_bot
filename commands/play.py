@@ -22,6 +22,11 @@ async def play_next_in_queue(ctx, vc, *, replay = False, next_s = False):
     
 
     songs = playlist_data.get("songs", [])
+
+    if len(songs) == 0:
+        await ctx.send(f"No hay canciones registradas")
+        return
+
     index = playlist_data.get("now_playing", 0)
     index = 0 if index <= -1 else index
     index = index + 1 if next_s else index

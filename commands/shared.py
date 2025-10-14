@@ -3,6 +3,7 @@ import asyncio
 import discord
 import tempfile
 import os
+import json
 from urllib.parse import urlparse, parse_qs
 
 async def show_progress(ctx, title, duration, vc):
@@ -23,18 +24,32 @@ async def show_progress(ctx, title, duration, vc):
 
 
 def get_temp_playlist_path(guild_id, playlist_name=None):
+    """
+    Devuelve la ruta del archivo JSON temporal de la playlist del servidor (guild).
+    Si no existe, lo crea con valores por defecto.
+    """
     base_dir = os.path.join(tempfile.gettempdir(), "discord_music_bot")
-
     guild_dir = os.path.join(base_dir, f"guild_{guild_id}")
-
     os.makedirs(guild_dir, exist_ok=True)
 
     if playlist_name is None:
-        # timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        playlist_name = f"temp_playlist"
+        playlist_name = "temp_playlist"
 
-    # Archivo JSON final
-    return os.path.join(guild_dir, f"{playlist_name}.json")
+    file_path = os.path.join(guild_dir, f"{playlist_name}.json")
+
+    # Si el archivo no existe, crearlo con valores iniciales
+    if not os.path.exists(file_path):
+        default_data = {
+            "guild_id": guild_id,
+            "now_playing": -1,
+            "stopped": True,
+            "loop": False,
+            "songs": []
+        }
+        with open(file_path, "w", encoding="utf-8") as f:
+            json.dump(default_data, f, indent=2, ensure_ascii=False)
+
+    return file_path
 
 
 def extract_expiration_from_url(url: str):
