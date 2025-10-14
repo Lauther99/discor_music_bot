@@ -71,7 +71,7 @@ pip install -r requirements.txt
 echo.
 
 REM --- Pedir token de Discord ---
-echo [4/5] Configurando token del bot...
+echo [5/5] Configurando token del bot...
 set /p TOKEN="Introduce el token de tu bot de Discord: "
 echo DISCORD_BOT_TOKEN=%TOKEN%> .env
 echo Token guardado correctamente.
