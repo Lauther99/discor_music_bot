@@ -37,12 +37,35 @@ if %errorlevel% neq 0 (
     move %ffdir%\bin\ffmpeg.exe . >nul
     rmdir /s /q %ffdir%
     del ffmpeg.zip
+    :: Agregar la carpeta actual al PATH de usuario
+    setx PATH "%CD%;%PATH%" >nul
+    echo FFmpeg agregado al PATH correctamente.
 )
 echo FFmpeg instalado correctamente.
 echo.
 
+REM --- Descargar repositorio ---
+echo [3/5] Descargando proyecto...
+if not exist "discor_music_bot" (
+    powershell -Command "Invoke-WebRequest -Uri 'https://github.com/Lauther99/discor_music_bot/archive/refs/heads/main.zip' -OutFile 'bot.zip'"
+    powershell -Command "Expand-Archive bot.zip -DestinationPath ."
+    ren "discor_music_bot-main" "discor_music_bot"
+    del bot.zip
+) else (
+    echo Proyecto ya descargado.
+)
+
 REM --- Instalar dependencias ---
-echo [3/5] Instalando dependencias del bot...
+echo [4/5] Instalando dependencias del bot...
+cd discor_music_bot
+:: Crear entorno virtual si no existe
+if not exist venv (
+    python -m venv venv
+)
+:: Activar entorno virtual
+call venv\Scripts\activate.bat
+
+:: Actualizar pip e instalar dependencias
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 echo.
@@ -53,15 +76,6 @@ set /p TOKEN="Introduce el token de tu bot de Discord: "
 echo DISCORD_BOT_TOKEN=%TOKEN%> .env
 echo Token guardado correctamente.
 echo.
-
-REM --- Clonar repositorio ---
-echo [5/5] Clonando proyecto...
-if not exist "discor_music_bot" (
-    git clone https://github.com/Lauther99/discor_music_bot.git
-
-) else (
-    echo Repositorio ya clonado.
-)
 
 echo Configuracion completa.
 pause
