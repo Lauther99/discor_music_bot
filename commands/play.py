@@ -55,6 +55,10 @@ async def play_next_in_queue(ctx, vc, bot, *, replay=False, next_s=False):
     webpage_url = song.get("webpage_url")
     expiration_ts = song.get("exp", 0)
 
+    if vc and vc.is_playing():
+        await update_view_or_message(bot, ctx, f"🎶 Reproduciendo: **{title}** ({index+1}/{len(songs)})")
+        return
+
     # 🕒 Validar expiración
     now = int(time.time())
     if expiration_ts and now >= expiration_ts:
@@ -126,7 +130,7 @@ class PlayCommand(commands.Cog):
         self.bot = bot
 
     @commands.command(name="play")
-    async def play(self, ctx, *, search: str = None):
+    async def play(self, ctx):
         if ctx.voice_client is None:
             await update_view_or_message(self.bot, ctx, "🔊 El bot no está conectado a un canal de voz. Usa `!join` primero.")
             return
@@ -136,66 +140,10 @@ class PlayCommand(commands.Cog):
         guild_id = ctx.guild.id
         playlist_path = get_temp_playlist_path(guild_id)
 
-        if search is None:
-            if not os.path.exists(playlist_path):
-                await update_view_or_message(self.bot, ctx, "⚠️ No hay ninguna playlist guardada para continuar.")
-                return
-
-            await update_view_or_message(self.bot, ctx, "▶️ Reanudando la playlist anterior...")
-            await play_next_in_queue(ctx, vc, self.bot, replay=True)
+        if not os.path.exists(playlist_path):
+            await update_view_or_message(self.bot, ctx, "⚠️ No hay ninguna playlist guardada para continuar.")
             return
-        
-        await update_view_or_message(self.bot, ctx, f"🔍 Buscando **{search}**...")
 
-        options = {**YDL_OPTIONS, "extract_flat": True}
-
-        with yt_dlp.YoutubeDL(options) as ydl:
-            search_info = ydl.extract_info(f"ytsearch:{search}", download=False)
-
-            if not search_info.get("entries"):
-                await update_view_or_message(self.bot, ctx, "❌ No se encontró ningún resultado.")
-                return
-
-            entry = search_info["entries"][0]
-            url = entry["url"]
-
-            if not url:
-                await update_view_or_message(self.bot, ctx, "❌ No se encontró ningún resultado.")
-                return
-
-            if "channel" in url or "list=" in url:
-                await update_view_or_message(self.bot, ctx, f"⚠️ Eso parece ser un canal o playlist. Prueba con un video específico 🎵")
-                return
-
-        with yt_dlp.YoutubeDL(YDL_OPTIONS) as ydl2:
-            info = ydl2.extract_info(url, download=False)
-
-        stream_url = info.get("url")
-        title = info.get("title", "Desconocido")
-        duration = info.get("duration", 0)
-
-        playlist_data = {
-            "guild_id": guild_id,
-            "now_playing": -1,
-            "stopped": False,
-            "loop": False,
-            "panel": {},
-            "songs": [
-                {
-                    "title": title,
-                    "url": stream_url,
-                    "duration": duration,
-                    "webpage_url": info.get("webpage_url"),
-                    "exp": extract_expiration_from_url(stream_url),
-                }
-            ],
-        }
-
-        with open(playlist_path, "w", encoding="utf-8") as f:
-            json.dump(playlist_data, f, indent=2, ensure_ascii=False)
-
-        vc.stop()
+        await update_view_or_message(self.bot, ctx, "▶️ Reanudando la playlist anterior...")
         await play_next_in_queue(ctx, vc, self.bot, replay=True)
-
-        if duration > 0:
-            await show_progress(ctx, title, duration, vc, self.bot)
+        return
