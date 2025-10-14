@@ -42,8 +42,9 @@ def get_temp_playlist_path(guild_id, playlist_name=None):
         default_data = {
             "guild_id": guild_id,
             "now_playing": -1,
-            "stopped": True,
+            "stopped": False,
             "loop": False,
+            "panel": {},
             "songs": []
         }
         with open(file_path, "w", encoding="utf-8") as f:
@@ -70,3 +71,18 @@ async def update_view_or_message(bot, ctx, message, **kwargs):
         await view.update_panel(status=message, **kwargs)
     else:
         await ctx.send(message)
+
+def is_youtube_url(text: str) -> bool:
+    """
+    Verifica si el texto es un enlace válido de YouTube.
+    """
+    try:
+        parsed = urlparse(text)
+        if parsed.scheme not in ("http", "https"):
+            return False
+        if parsed.netloc not in ("www.youtube.com", "youtube.com", "youtu.be", "music.youtube.com"):
+            return False
+        return True
+    except Exception:
+        return False
+
