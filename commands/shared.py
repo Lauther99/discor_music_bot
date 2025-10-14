@@ -6,8 +6,8 @@ import os
 import json
 from urllib.parse import urlparse, parse_qs
 
-async def show_progress(ctx, title, duration, vc):
-    message = await ctx.send(f"⏱ Reproduciendo: **{title}** — 0:00 / {duration // 60}:{duration % 60:02d}")
+async def show_progress(ctx, title, duration, vc, bot):
+    message = await update_view_or_message(bot, ctx, f"⏱ Reproduciendo: **{title}** — 0:00 / {duration // 60}:{duration % 60:02d}")
     elapsed = 0
 
     while vc.is_playing() and elapsed < duration:

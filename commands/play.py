@@ -179,6 +179,7 @@ class PlayCommand(commands.Cog):
             "now_playing": -1,
             "stopped": False,
             "loop": False,
+            "panel": {},
             "songs": [
                 {
                     "title": title,
@@ -197,4 +198,4 @@ class PlayCommand(commands.Cog):
         await play_next_in_queue(ctx, vc, self.bot, replay=True)
 
         if duration > 0:
-            await show_progress(ctx, title, duration, vc)
+            await show_progress(ctx, title, duration, vc, self.bot)
