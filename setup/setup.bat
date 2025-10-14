@@ -6,61 +6,40 @@ echo        🎵 INSTALADOR DEL BOT DE MÚSICA
 echo ===============================================
 echo.
 
-:: Instalar Git
-echo Instalando Git...
-git --version >nul 2>&1
-IF %ERRORLEVEL% NEQ 0 (
-    echo Git no encontrado, descargalo e instalalo manualmente.
-)
-
 REM --- Verificar Python ---
 echo [1/5] Verificando instalación de Python...
 where python >nul 2>nul
 if %errorlevel% neq 0 (
-    echo Python no encontrado. Descargando Python 3.12.5...
-    powershell -Command ^
-    "$url='https://www.python.org/ftp/python/3.12.5/python-3.12.5-amd64.exe'; ^
-     $output='python-installer.exe'; ^
-     $wc=New-Object System.Net.WebClient; ^
-     $wc.DownloadProgressChanged += { Write-Progress -Activity 'Descargando Python' -Status '$($_.ProgressPercentage)%' -PercentComplete $_.ProgressPercentage }; ^
-     $wc.DownloadFileAsync($url, $output); ^
-     while ($wc.IsBusy) { Start-Sleep -Milliseconds 200 }"
-    echo.
-    echo Instalación de Python completa.
+    echo Python no encontrado. Instalando Python 3.12.5...
+    powershell -Command "Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/3.12.5/python-3.12.5-amd64.exe' -OutFile 'python-installer.exe'"
+    start /wait python-installer.exe /quiet InstallAllUsers=1 PrependPath=1 Include_test=0
+    del python-installer.exe
 )
+echo Python instalado correctamente.
+echo.
 
 REM --- Verificar FFmpeg ---
 echo [2/5] Verificando instalación de FFmpeg...
 where ffmpeg >nul 2>nul
 if %errorlevel% neq 0 (
     echo FFmpeg no encontrado. Descargando...
+    powershell -Command "Start-BitsTransfer -Source 'https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip' -Destination 'ffmpeg.zip'"
     
-    :: Descargar FFmpeg con barra de progreso
-    powershell -Command ^
-    "$url='https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip'; ^
-     $output='ffmpeg.zip'; ^
-     $wc=New-Object System.Net.WebClient; ^
-     $wc.DownloadProgressChanged += { Write-Progress -Activity 'Descargando FFmpeg' -Status '$($_.ProgressPercentage)%' -PercentComplete $_.ProgressPercentage }; ^
-     $wc.DownloadFileAsync($url, $output); ^
-     while ($wc.IsBusy) { Start-Sleep -Milliseconds 200 }"
-    echo.
     echo Extrayendo FFmpeg...
     powershell -Command "Expand-Archive ffmpeg.zip -DestinationPath ."
-
-    :: Mover el ejecutable a la carpeta actual
+    
     set ffdir=
     for /d %%i in (ffmpeg-*) do set ffdir=%%i
     move %ffdir%\bin\ffmpeg.exe . >nul
     rmdir /s /q %ffdir%
     del ffmpeg.zip
-
+    
     :: Agregar la carpeta actual al PATH de usuario
     setx PATH "%CD%;%PATH%" >nul
     echo FFmpeg agregado al PATH correctamente.
 )
 echo FFmpeg instalado correctamente.
 echo.
-
 
 REM --- Descargar repositorio ---
 echo [3/5] Descargando proyecto...
