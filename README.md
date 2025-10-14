@@ -15,13 +15,12 @@ Antes de ejecutar el bot, necesitas:
 
 ## 🛠️ Instalación
 
-Ejecuta `setup.bat` haciendo doble clic y sigue los pasos:
-  - Instalar Python (si no está instalado).
-  - Instalar FFmpeg (si no está instalado).
-  - Instalar dependencias.
-  - Introducir el token de tu bot de Discord (se guarda en `.env`).
+Puedes descargar los scripts de instalación y ejecución directamente desde GitHub:
 
-... O descarga este repositorio.
+- [setup.bat](https://github.com/Lauther99/discor_music_bot/raw/main/installers/setup.bat) – Instala Python, FFmpeg, dependencias y clona el repositorio.
+- [launch_bot.bat](https://github.com/Lauther99/discor_music_bot/raw/main/installers/launch_bot.bat) – Ejecuta el bot una vez instalado.
+
+> 💡 Coloca ambos archivos en la misma carpeta antes de ejecutar ... O descarga este repositorio.
 ---
 
 ## 🚀 Ejecutar el bot
