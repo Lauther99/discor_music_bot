@@ -40,8 +40,9 @@ class QueueCommand(commands.Cog):
             mins, secs = divmod(duration, 60)
             time_str = f"{int(mins):02}:{int(secs):02}"
 
-            prefix = "▶️" if i == current_index else f"{i+1}."
-            lines.append(f"{prefix} **{title}** `{time_str}`")
+            prefix = f"{i+1}."
+            sufix = " - ▶️ Reproduciendo ... ▶️ - " if i == current_index else f" - "
+            lines.append(f"{prefix} **{title}** {sufix} `{time_str}`")
 
         # Limitar si hay muchas canciones
         max_songs_display = 10
