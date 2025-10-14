@@ -3,10 +3,11 @@ import asyncio
 import discord
 import tempfile
 import os
+import json
 from urllib.parse import urlparse, parse_qs
 
-async def show_progress(ctx, title, duration, vc):
-    message = await ctx.send(f"⏱ Reproduciendo: **{title}** — 0:00 / {duration // 60}:{duration % 60:02d}")
+async def show_progress(ctx, title, duration, vc, bot):
+    message = await update_view_or_message(bot, ctx, f"⏱ Reproduciendo: **{title}** — 0:00 / {duration // 60}:{duration % 60:02d}")
     elapsed = 0
 
     while vc.is_playing() and elapsed < duration:
@@ -23,18 +24,33 @@ async def show_progress(ctx, title, duration, vc):
 
 
 def get_temp_playlist_path(guild_id, playlist_name=None):
+    """
+    Devuelve la ruta del archivo JSON temporal de la playlist del servidor (guild).
+    Si no existe, lo crea con valores por defecto.
+    """
     base_dir = os.path.join(tempfile.gettempdir(), "discord_music_bot")
-
     guild_dir = os.path.join(base_dir, f"guild_{guild_id}")
-
     os.makedirs(guild_dir, exist_ok=True)
 
     if playlist_name is None:
-        # timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        playlist_name = f"temp_playlist"
+        playlist_name = "temp_playlist"
 
-    # Archivo JSON final
-    return os.path.join(guild_dir, f"{playlist_name}.json")
+    file_path = os.path.join(guild_dir, f"{playlist_name}.json")
+
+    # Si el archivo no existe, crearlo con valores iniciales
+    if not os.path.exists(file_path):
+        default_data = {
+            "guild_id": guild_id,
+            "now_playing": -1,
+            "stopped": False,
+            "loop": False,
+            "panel": {},
+            "songs": []
+        }
+        with open(file_path, "w", encoding="utf-8") as f:
+            json.dump(default_data, f, indent=2, ensure_ascii=False)
+
+    return file_path
 
 
 def extract_expiration_from_url(url: str):
@@ -48,4 +64,25 @@ def extract_expiration_from_url(url: str):
         pass
     return None
 
+async def update_view_or_message(bot, ctx, message, **kwargs):
+    view = bot.music_panels.get(ctx.guild.id)
+    
+    if view:
+        await view.update_panel(status=message, **kwargs)
+    else:
+        await ctx.send(message)
+
+def is_youtube_url(text: str) -> bool:
+    """
+    Verifica si el texto es un enlace válido de YouTube.
+    """
+    try:
+        parsed = urlparse(text)
+        if parsed.scheme not in ("http", "https"):
+            return False
+        if parsed.netloc not in ("www.youtube.com", "youtube.com", "youtu.be", "music.youtube.com"):
+            return False
+        return True
+    except Exception:
+        return False
 

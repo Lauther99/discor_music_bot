@@ -1,7 +1,7 @@
 from discord.ext import commands
 import json
 import os
-from .shared import get_temp_playlist_path
+from .shared import get_temp_playlist_path, update_view_or_message
 
 class StopCommand(commands.Cog):
     def __init__(self, bot):
@@ -11,7 +11,7 @@ class StopCommand(commands.Cog):
     async def stop(self, ctx):
         vc = ctx.voice_client
         if not vc or not vc.is_playing():
-            await ctx.send("❌ No hay música reproduciéndose.")
+            await update_view_or_message(self.bot, ctx, "❌ No hay música reproduciéndose.")
             return
 
         vc.stop()
@@ -25,6 +25,6 @@ class StopCommand(commands.Cog):
 
             with open(playlist_path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2, ensure_ascii=False)
-
-        await ctx.send("⏹️ Música detenida.")
+                
+        await update_view_or_message(self.bot, ctx, "⏹️ Música detenida.")
 

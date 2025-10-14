@@ -4,7 +4,7 @@ import yt_dlp
 import discord
 from discord.ext import commands
 from config.config import YDL_OPTIONS
-from .shared import show_progress, get_temp_playlist_path, extract_expiration_from_url
+from .shared import is_youtube_url, get_temp_playlist_path, extract_expiration_from_url, update_view_or_message
 
 class AddCommand(commands.Cog):
     def __init__(self, bot):
@@ -18,30 +18,34 @@ class AddCommand(commands.Cog):
 
         # Verificar que haya una playlist activa
         if not os.path.exists(playlist_path):
-            await ctx.send("⚠️ No hay una playlist activa. Usa `!play <canción>` primero.")
+            await update_view_or_message(self.bot, ctx, "⚠️ No hay una playlist activa.")
             return
 
-        await ctx.send(f"🔍 Buscando **{search}** para agregar a la playlist...")
+        await update_view_or_message(self.bot, ctx, f"🔍 Buscando **{search}** para agregar a la playlist...")
+
+        is_link = is_youtube_url(search)
+
+        search_target = search if is_link else f"ytsearch:{search}"
 
         # Buscar la canción
         options = {**YDL_OPTIONS, "extract_flat": True}
         with yt_dlp.YoutubeDL(options) as ydl:
-            search_info = ydl.extract_info(f"ytsearch:{search}", download=False)
+            if not is_link:
+                flat_info = ydl.extract_info(search_target, download=False)
+                if not flat_info.get("entries"):
+                    await update_view_or_message(self.bot, ctx, "❌ No se encontró ningún resultado.")
+                    return
 
-            if not search_info.get("entries"):
-                await ctx.send("❌ No se encontró ningún resultado.")
-                return
+                entry = flat_info["entries"][0]
+                search_target = entry.get("url")
 
-            entry = search_info["entries"][0]
-            url = entry.get("url")
-
-            if not url or "channel" in url or "list=" in url:
-                await ctx.send("⚠️ Eso parece ser un canal o playlist. Prueba con un video específico 🎵")
+            if not search_target or "channel" in search_target or "list=" in search_target:
+                await update_view_or_message(self.bot, ctx, "⚠️ Eso parece ser un canal o playlist. Prueba con un video específico 🎵")
                 return
 
         # Obtener info completa
         with yt_dlp.YoutubeDL(YDL_OPTIONS) as ydl2:
-            info = ydl2.extract_info(url, download=False)
+            info = ydl2.extract_info(search_target, download=False)
 
         stream_url = info.get("url")
         title = info.get("title", "Desconocido")
@@ -65,4 +69,4 @@ class AddCommand(commands.Cog):
         with open(playlist_path, "w", encoding="utf-8") as f:
             json.dump(playlist_data, f, indent=2, ensure_ascii=False)
 
-        await ctx.send(f"✅ **{title}** fue agregada a la playlist ({len(playlist_data['songs'])} canciones en total).")
+        await update_view_or_message(self.bot, ctx, f"✅ **{title}** fue agregada a la playlist ({len(playlist_data['songs'])} canciones en total).")
