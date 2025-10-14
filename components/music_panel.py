@@ -1,4 +1,5 @@
 # components/music_panel.py
+import asyncio
 import discord
 from discord.ext import commands
 
@@ -69,12 +70,18 @@ class MusicControls(discord.ui.View):
         await interaction.response.defer(ephemeral=True)
         
         await self.update_panel(status="✍️ Esperando entrada del usuario...\n\n```\n> escribe abajo ⬇️\n```")
-        def check(m): return m.author == interaction.user and m.channel == interaction.channel
+        
+        def check(m): 
+            return m.author == interaction.user and m.channel == interaction.channel
+
         try:
             msg = await self.bot.wait_for("message", check=check, timeout=30.0)
             await self.ctx.invoke(self.bot.get_command("add"), search=msg.content)
-        except Exception:
+            await msg.delete()
+        except asyncio.TimeoutError:
             await self.update_panel(status="⏰ Tiempo agotado.")
+        except Exception as e:
+            await self.update_panel(status=f"❌ Error: {e}")
 
     @discord.ui.button(label="📜 Lista", style=discord.ButtonStyle.secondary)
     async def queue(self, interaction: discord.Interaction, button: discord.ui.Button):
