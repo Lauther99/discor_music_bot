@@ -38,15 +38,12 @@ class MusicControls(discord.ui.View):
     async def play_resume(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.defer(ephemeral=True)
         vc = self.vc
-        # resume if paused
+
         if vc and vc.is_paused():
             vc.resume()
             await self.update_panel(status="▶️ Reanudado")
             return
-        # if already playing
-        if vc and vc.is_playing():
-            await self.update_panel(status="Ya está reproduciendo.")
-            return
+
         # otherwise call your play command without args (play playlist.current desde inicio)
         await self.ctx.invoke(self.bot.get_command("play"))
 
