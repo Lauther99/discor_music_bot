@@ -9,25 +9,34 @@ class JoinCommand(commands.Cog):
     @commands.command(name="join")
     async def join(self, ctx):
         if ctx.author.voice is None:
-            await ctx.send("❌ Debes estar en un canal de voz para usar este comando.")
+            await ctx.send("❌ Debes estar en un canal de voz.")
             return
 
         channel = ctx.author.voice.channel
-        vc = ctx.voice_client
-
-        if vc is None:
-            vc = await channel.connect()
-            await ctx.send(f"✅ Conectado a **{channel.name}**.")
-        else:
-            await vc.move_to(channel)
-            await ctx.send(f"🔄 Movido a **{channel.name}**.")
-
-        # Embed con el panel de control
-        embed = discord.Embed(
-            title="🎶 Panel de Control",
-            description="Usa los botones de abajo para controlar la reproducción.",
-            color=discord.Color.blurple()
-        )
-
+        vc = await channel.connect()
+        
         view = MusicControls(self.bot, ctx, vc)
-        await ctx.send(embed=embed, view=view)
+        embed = discord.Embed(title="🎶 Panel musical", description="Usa los botones para controlar la música 🎧", color=discord.Color.green())
+        message = await ctx.send(embed=embed, view=view)
+
+        # Guardar el mensaje dentro del view
+        view.message = message
+        self.bot.music_panels[ctx.guild.id] = view
+            
+
+        # if vc is None:
+        #     vc = await channel.connect()
+        #     await ctx.send(f"✅ Conectado a **{channel.name}**.")
+        # else:
+        #     await vc.move_to(channel)
+        #     await ctx.send(f"🔄 Movido a **{channel.name}**.")
+
+        # # Embed con el panel de control
+        # embed = discord.Embed(
+        #     title="🎶 Panel de Control",
+        #     description="Usa los botones de abajo para controlar la reproducción.",
+        #     color=discord.Color.blurple()
+        # )
+
+        # view = MusicControls(self.bot, ctx, vc)
+        # await ctx.send(embed=embed, view=view)

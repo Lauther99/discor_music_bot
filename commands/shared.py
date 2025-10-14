@@ -63,4 +63,10 @@ def extract_expiration_from_url(url: str):
         pass
     return None
 
-
+async def update_view_or_message(bot, ctx, message, **kwargs):
+    view = bot.music_panels.get(ctx.guild.id)
+    
+    if view:
+        await view.update_panel(status=message, **kwargs)
+    else:
+        await ctx.send(message)

@@ -2,7 +2,8 @@ import os
 import json
 import discord
 from discord.ext import commands
-from .shared import get_temp_playlist_path
+from .shared import get_temp_playlist_path, update_view_or_message
+
 
 class QueueCommand(commands.Cog):
     def __init__(self, bot):
@@ -16,7 +17,9 @@ class QueueCommand(commands.Cog):
 
         # Verificar que exista la playlist
         if not os.path.exists(playlist_path):
-            await ctx.send("⚠️ No hay una playlist activa. Usa `!play` primero.")
+            await update_view_or_message(
+                self.bot, ctx, "⚠️ No hay una playlist activa. Usa `!play` primero."
+            )
             return
 
         with open(playlist_path, "r", encoding="utf-8") as f:
@@ -26,7 +29,7 @@ class QueueCommand(commands.Cog):
         current_index = playlist_data.get("now_playing", 0)
 
         if not songs:
-            await ctx.send("🎶 La playlist está vacía.")
+            await update_view_or_message(self.bot, ctx, "🎶 La playlist está vacía.")
             return
 
         # Construir mensaje de cola
@@ -49,10 +52,6 @@ class QueueCommand(commands.Cog):
 
         description = "\n".join(lines) + extra
 
-        embed = discord.Embed(
-            title="🎵 Playlist actual",
-            description=description,
-            color=discord.Color.blue()
+        await update_view_or_message(
+            self.bot, ctx, description, **{"status_label": "🎵 Playlist actual"}
         )
-
-        await ctx.send(embed=embed)
