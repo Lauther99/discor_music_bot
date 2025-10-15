@@ -3,7 +3,7 @@ cls
 title Instalador del Bot de Música
 color 0a
 echo ===============================================
-echo        🎵 INSTALADOR DEL BOT DE MÚSICA
+echo                    INSTALLER
 echo ===============================================
 echo.
 
