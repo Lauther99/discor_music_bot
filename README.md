@@ -17,8 +17,9 @@ Antes de ejecutar el bot, necesitas:
 
 Puedes descargar los scripts de instalación y ejecución directamente desde GitHub:
 
-- [setup.bat](https://github.com/Lauther99/discor_music_bot/blob/main/setup/setup.bat) – Instala FFmpeg y dependencias.
-- [launch_bot.bat](https://github.com/Lauther99/discor_music_bot/blob/main/setup/launch_bot.bat) – Ejecuta el bot una vez instalado.
+- [Setup con FFmpeg](https://github.com/Lauther99/discor_music_bot/blob/main/setup/setup.bat) – Instala FFmpeg y dependencias.
+- [Setup sin FFmpeg](https://github.com/Lauther99/discor_music_bot/blob/main/setup/setup.bat) – Instala dependencias, pero es necesario instalar FFmpeg manualmente.
+- [Launch](https://github.com/Lauther99/discor_music_bot/blob/main/setup/launch_bot.bat) – Ejecuta el bot una vez instalado.
 
 > 💡 Coloca ambos archivos en la misma carpeta antes de ejecutar ... O descarga este repositorio.
 ---
