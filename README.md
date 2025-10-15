@@ -8,18 +8,16 @@ Un bot de música para Discord que permite reproducir canciones, playlists y con
 
 Antes de ejecutar el bot, necesitas:
 
-1. Python 3.12 o superior.
-2. FFmpeg.
-3. Windows 10 o superior.
-4. Conexión a internet.
+1. [Python 3.12 o superior](https://www.python.org/downloads/).
+2. [FFmpeg](https://www.gyan.dev/ffmpeg/builds/), agregar al ffmpeg PATH.
 
 ---
 
-## 🛠️ Instalación
+## 🛠️ Instalación Windows
 
 Puedes descargar los scripts de instalación y ejecución directamente desde GitHub:
 
-- [setup.bat](https://github.com/Lauther99/discor_music_bot/blob/main/setup/setup.bat) – Instala FFmpeg, dependencias y descarga el repositorio.
+- [setup.bat](https://github.com/Lauther99/discor_music_bot/blob/main/setup/setup.bat) – Instala FFmpeg y dependencias.
 - [launch_bot.bat](https://github.com/Lauther99/discor_music_bot/blob/main/setup/launch_bot.bat) – Ejecuta el bot una vez instalado.
 
 > 💡 Coloca ambos archivos en la misma carpeta antes de ejecutar ... O descarga este repositorio.
