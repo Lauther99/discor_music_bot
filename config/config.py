@@ -14,5 +14,5 @@ if not os.path.exists(FFMPEG_PATH):
     print(f"[WARN] No se encontró ffmpeg en {FFMPEG_PATH}, usando el del sistema.")
     FFMPEG_PATH = "ffmpeg" 
 
-    
+print(FFMPEG_PATH)
 FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
