@@ -35,6 +35,8 @@ pyinstaller --noconfirm ^
     --name "MusicBot" ^
     --add-data "components;components." ^
     --add-data "commands;commands" ^
+    --add-data "ffmpeg;ffmpeg" ^
+    --add-data "libs;libs" ^
     --add-data "config;config" ^
     --hidden-import yt_dlp ^
     --hidden-import discord ^
@@ -45,6 +47,6 @@ echo.
 echo ===============================================
 echo ✅ Compilación completada correctamente
 echo ===============================================
-echo El ejecutable se encuentra en: dist\MusicBot\main.exe
+echo El ejecutable se encuentra en: dist\MusicBot.exe
 echo.
 pause
