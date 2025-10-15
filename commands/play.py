@@ -109,7 +109,10 @@ async def play_next_in_queue(ctx, vc, bot, *, replay=False, next_s=False):
             play_next_in_queue(ctx, vc, bot, next_s=True), loop
         )
 
-    vc.play(discord.FFmpegPCMAudio(url, executable=FFMPEG_PATH, **FFMPEG_OPTIONS), after=after_play)
+    try:
+        vc.play(discord.FFmpegPCMAudio(url, executable=FFMPEG_PATH, **FFMPEG_OPTIONS), after=after_play)
+    except Exception as e:
+        print(f"[ERROR] No se pudo reproducir el audio: {e}")
 
     await update_view_or_message(
         bot, ctx, f"🎶 Reproduciendo: **{title}** ({index+1}/{len(songs)})"

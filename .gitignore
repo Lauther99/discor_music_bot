@@ -7,8 +7,7 @@ __pycache__
 asd
 bot2.py
 
-bot.spec
-music_bot.spec
+MusicBot.spec
 build
 
 dist

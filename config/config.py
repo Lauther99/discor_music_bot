@@ -1,6 +1,13 @@
 import os
+import sys
 
-FFMPEG_PATH = os.path.join(os.path.dirname(__file__), "..", "ffmpeg", "bin", "ffmpeg.exe")
+if getattr(sys, 'frozen', False):
+    BASE_DIR = sys._MEIPASS
+    FFMPEG_PATH = r"C:\ffmpeg\bin\ffmpeg.exe"
+else:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    FFMPEG_PATH = os.path.join(BASE_DIR, "..", "ffmpeg", "bin", "ffmpeg.exe")
+
 
 YDL_OPTIONS = {
     'format': '140/bestaudio/best',
