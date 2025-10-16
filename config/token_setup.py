@@ -2,12 +2,8 @@ import os
 from dotenv import load_dotenv
 import tkinter as tk
 from tkinter import messagebox
+from .config import ENV_PATH
 
-APPDATA = os.getenv('APPDATA')
-BOT_DIR = os.path.join(APPDATA, "MiBot")
-ENV_PATH = os.path.join(BOT_DIR, ".env")
-
-os.makedirs(BOT_DIR, exist_ok=True)
 
 def load_token():
     if os.path.exists(ENV_PATH):

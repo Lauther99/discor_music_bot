@@ -5,6 +5,7 @@ import tempfile
 import os
 import json
 from urllib.parse import urlparse, parse_qs
+from config.config import PLAYLIST_PATH
 
 async def show_progress(ctx, title, duration, vc, bot):
     message = await update_view_or_message(bot, ctx, f"⏱ Reproduciendo: **{title}** — 0:00 / {duration // 60}:{duration % 60:02d}")
@@ -28,7 +29,7 @@ def get_temp_playlist_path(guild_id, playlist_name=None):
     Devuelve la ruta del archivo JSON temporal de la playlist del servidor (guild).
     Si no existe, lo crea con valores por defecto.
     """
-    base_dir = os.path.join(tempfile.gettempdir(), "discord_music_bot")
+    base_dir = PLAYLIST_PATH
     guild_dir = os.path.join(base_dir, f"guild_{guild_id}")
     os.makedirs(guild_dir, exist_ok=True)
 
