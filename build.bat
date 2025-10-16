@@ -41,6 +41,7 @@ pyinstaller --noconfirm ^
     --hidden-import yt_dlp ^
     --hidden-import discord ^
     --hidden-import asyncio ^
+    --icon assets/icon2.ico ^
     main_exe.py
 
 echo.
